@@ -15,4 +15,19 @@ router.get('/:id', (req, res)=>{
     }
 })
 
+router.post('/', (req, res)=>{
+    member = {
+        id: members.length,
+        name: req.body.name,
+        age: req.body.age
+    }
+
+    if (!member.name || !member.age) {
+        return res.status(200).json({ msg: "please include a name and age"})
+    }
+
+    members.push(member)
+    res.send(members)
+})
+
 module.exports = router
