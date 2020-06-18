@@ -2,11 +2,7 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const members = require('./Members')
-
-const logger = (req, res, next) => {
-    console.log(`${req.prot}:// ${req.get('host')}${req.originalUrl}`)
-    next()
-}
+const logger = require('./middleware/logger')
 
 app.use(logger)
 
