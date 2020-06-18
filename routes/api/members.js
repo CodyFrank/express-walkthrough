@@ -1,12 +1,12 @@
 const express = require('express')
-const app = express()
 const members = require('../../Members')
+const router = express.Router()
 
-app.get('/api/members', (req, res)=>{
+router.get('/', (req, res)=>{
     res.json(members)
 })
 
-app.get('/api/members/:id', (req, res)=>{
+router.get('/:id', (req, res)=>{
     const found = members.some(member => member.id === parseInt(req.params.id))
     if (found) {
         res.json(members.filter(member => member.id === parseInt(req.params.id)))
@@ -14,3 +14,5 @@ app.get('/api/members/:id', (req, res)=>{
         res.status(400).json({ msg: `No member found with id of ${req.params.id}`})
     }
 })
+
+module.exports = router
