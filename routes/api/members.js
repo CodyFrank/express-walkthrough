@@ -2,10 +2,14 @@ const express = require('express')
 const members = require('../../Members')
 const router = express.Router()
 
+
+
+// member index page
 router.get('/', (req, res)=>{
     res.json(members)
 })
 
+// member show page
 router.get('/:id', (req, res)=>{
     const found = members.some(member => member.id === parseInt(req.params.id))
     if (found) {
@@ -15,6 +19,7 @@ router.get('/:id', (req, res)=>{
     }
 })
 
+// member create page
 router.post('/', (req, res)=>{
     member = {
         id: members.length,
@@ -29,5 +34,25 @@ router.post('/', (req, res)=>{
     members.push(member)
     res.send(members)
 })
+
+// member update page
+router.patch('/:id', (req, res) => {
+    const found = members.some( member => member.id === parseInt(req.params.id))
+
+    if (found) {
+        const updMember = req.body
+        members.forEach(member => {
+            if (member.id === parseInt(req.params.id)) {
+                member.name = updMember.name ? updMember.name : member.name
+                member.age = updMember.age ? updMember.age : mamber.age
+                res.json(member)
+            }
+        })
+    } else {
+        res.status(400).json({ msg: `no member with the id of ${req.params.id}`})
+    }
+})
+
+
 
 module.exports = router
