@@ -1,6 +1,7 @@
 const express = require('express')
 let members = require('../../Members')
 const router = express.Router()
+const uuid = require('uuid')
 
 
 
@@ -22,7 +23,7 @@ router.get('/:id', (req, res)=>{
 // member create page
 router.post('/', (req, res)=>{
     member = {
-        id: members.length,
+        id: uuid.v4(),
         name: req.body.name,
         age: req.body.age
     }
