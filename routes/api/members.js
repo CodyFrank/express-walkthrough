@@ -1,5 +1,5 @@
 const express = require('express')
-const members = require('../../Members')
+let members = require('../../Members')
 const router = express.Router()
 
 
@@ -50,6 +50,18 @@ router.patch('/:id', (req, res) => {
         })
     } else {
         res.status(400).json({ msg: `no member with the id of ${req.params.id}`})
+    }
+})
+
+// member delete
+router.delete('/:id', (req, res) => {
+    const found = members.some( member => member.id === parseInt(req.params.id))
+
+    if (found) {
+        members = members.filter( member => member.id !== parseInt(req.params.id))
+        res.json(members)
+    } else {
+        res.status(400).json({ msg: `no member found with id of ${id}`})
     }
 })
 
