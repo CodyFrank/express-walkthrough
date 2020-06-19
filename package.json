@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/CodyFrank/express-walkthrough#readme",
   "dependencies": {
+    "bootstrap": "^3.4.1",
     "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
     "moment": "^2.26.0",
     "nodemon": "^2.0.4"
   },

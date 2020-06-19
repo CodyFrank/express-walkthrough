@@ -2,16 +2,25 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const logger = require('./middleware/logger')
+const exphbs = require('express-handlebars')
 
 // uses logger middleware
 app.use(logger)
+
+// handlebars middleware
+app.engine('handlebars', exphbs({ defaultLayout: 'main'}))
+app.set('view engine', 'handlebars')
 
 // use bodyparser
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+app.get('/', (req, res) => {
+    res.render(path.join('index'))
+})
+
 // static routes
-app.use(express.static(path.join(__dirname, 'public')))
+// app.use(express.static(path.join(__dirname, 'public')))
 
 // members api routes
 app.use('/api/members', require('./routes/api/members'))
