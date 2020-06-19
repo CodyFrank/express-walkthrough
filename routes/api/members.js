@@ -34,6 +34,7 @@ router.post('/', (req, res)=>{
 
     members.push(member)
     res.send(members)
+    // res.redirect('/')
 })
 
 // member update page
